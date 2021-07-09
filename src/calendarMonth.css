@@ -1,0 +1,34 @@
+.calendar {
+    width: 1600px;
+    margin: 50px auto;
+    border: 1px solid black;
+}
+
+#monthLabel {
+    text-align: center;
+    background: lightblue;
+    padding: 15px;
+}
+
+.calendarDaysContainer{
+    width: 1415px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0px auto 50px;
+}
+
+#dayLabelContainer {
+    display: flex;
+    width: 1415px;
+    height: 50px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: auto;
+}
+
+.dayLabel{
+    width: 200px;
+    text-align: center;
+}

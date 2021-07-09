@@ -1,11 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import CalendarDay from './calendarDay';
+import CalendarMonth from './calendarMonth';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import { StockValue, months } from './interfaces';
+
+let sampleStockValues: StockValue[] = [
+    { symbol: 't', value: 55 },
+    { symbol: 'mo', value: 20 }
+];
 
 ReactDOM.render(
   <React.StrictMode>
-
+        <CalendarMonth month={months.July} />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,0 +1,30 @@
+.calendarDay {
+	width: 200px;
+	height: 200px;
+	border: 1px solid black;
+}
+
+.calendarDay h3 {
+	margin-left: 18.7px;
+}
+
+.stockValueContainer {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	height: 135px;
+}
+
+.stockValue {
+	width: 50px;
+	margin-bottom: 10px;
+}
+
+.stockValue h4 {
+	margin: 0px;
+}
+
+.stockValue p {
+	margin: 0px;
+}
