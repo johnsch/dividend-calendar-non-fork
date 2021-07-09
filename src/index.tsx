@@ -8,12 +8,25 @@ import { StockValue, months } from './interfaces';
 
 let sampleStockValues: StockValue[] = [
     { symbol: 't', value: 55 },
-    { symbol: 'mo', value: 20 }
+    //{ symbol: 'mo', value: 20 }
 ];
+
+interface MonthObject {
+    name: string,
+    days: number,
+    startingDay: number
+}
+
+let monthObject: MonthObject = Object.assign({startingDay: 0}, months.July);
+let dateObject = new Date();
+dateObject.setMonth(6);
+dateObject.setDate(1);
+
+monthObject.startingDay = dateObject.getDay();
 
 ReactDOM.render(
   <React.StrictMode>
-        <CalendarMonth month={months.July} />
+        <CalendarMonth month={monthObject} />
   </React.StrictMode>,
   document.getElementById('root')
 );

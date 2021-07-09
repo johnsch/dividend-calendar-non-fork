@@ -6,22 +6,28 @@ import './calendarMonth.css';
 type CalendarMonthProps = {
     month: {
         name: string,
-        days: number
+        days: number,
+        startingDay: number
     }
 }
 
 let sampleStockValues: StockValue[] = [
-    { symbol: 't', value: 55 },
+    //{ symbol: 't', value: 55 },
     { symbol: 'mo', value: 20 }
 ];
 
 export default function CalendarMonth({ month }: CalendarMonthProps) {
-    let { name, days } = month;
+    let { name, days, startingDay} = month;
+    
+
     let calendarDays: JSX.Element[] = [];
 
-    for (let i = 1; i <= days; i++) {
+    for (let x = 0; x < startingDay; x++)
+        calendarDays.push(<CalendarDay />);
+
+    for (let i = 1; i <= days; i++) 
         calendarDays.push(<CalendarDay day={i} stockValues={sampleStockValues}/>);
-    }
+    
 
     return ( 
         <div className='calendar'>

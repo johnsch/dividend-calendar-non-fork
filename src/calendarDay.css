@@ -1,11 +1,12 @@
 .calendarDay {
-	width: 200px;
-	height: 200px;
+	//width: 200px;
+	//height: 200px;
 	border: 1px solid black;
 }
 
 .calendarDay h3 {
 	margin-left: 18.7px;
+	margin-bottom: 0px;
 }
 
 .stockValueContainer {
@@ -13,7 +14,7 @@
 	flex-direction: column;
 	flex-wrap: wrap;
 	align-items: flex-end;
-	height: 135px;
+	overflow: hidden;
 }
 
 .stockValue {
