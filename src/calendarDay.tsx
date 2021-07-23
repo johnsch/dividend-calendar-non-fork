@@ -3,11 +3,21 @@ import './calendarDay.css';
 import { StockValue } from './interfaces';
 
 type CalendarDayProps = {
+	dayKey: number,
     day?: number,
-    stockValues?: StockValue[]
+    stockValues?: StockValue[],
+	borderSettings: BorderSettings
 };
 
-export default function CalendaryDay({ day, stockValues }: CalendarDayProps) {
+type BorderSettings = {
+	borderLeft?: string,
+	borderRight?: string,
+	borderTop?: string,
+	borderBottom?: string
+
+};
+
+export default function CalendaryDay({dayKey, day, stockValues, borderSettings }: CalendarDayProps) {
     function generateStockValueElements() {
         let stockValueElements: JSX.Element[] = [];
 
@@ -25,7 +35,7 @@ export default function CalendaryDay({ day, stockValues }: CalendarDayProps) {
     }
 
     return (
-        <div className='calendarDay'>
+        <div className='calendarDay' style={borderSettings}>
             <h3>{day}</h3>
             <div className='stockValueContainer'>
                 {generateStockValueElements()}

@@ -1,6 +1,6 @@
 .calendar {
-    width: 40%;
-    height: 50%;
+    width: 652px;
+    height: 589px;
     margin: 50px auto;
     border: 1px solid black;
 }
@@ -8,29 +8,25 @@
 #monthLabel {
     text-align: center;
     background: lightblue;
-    padding: 15px;
+    padding: 1px;
 }
 
 .calendarDaysContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-auto-rows: 1fr;
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    margin: 0px auto;
+    margin-left: 3px;
 }
 
 #dayLabelContainer {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto;
-
+    display: flex;
     height: 50px;
     flex-direction: row;
-    flex-wrap: wrap;
     align-items: center;
-    margin: auto;
+    margin-left: 3px;
 }
 
 .dayLabel{
+	width: 92px;
     text-align: center;
 }

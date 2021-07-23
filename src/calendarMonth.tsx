@@ -11,35 +11,74 @@ type CalendarMonthProps = {
     }
 }
 
+type BorderSettings = {
+	borderLeft?: string,
+	borderRight?: string,
+	borderTop?: string,
+	borderBottom?: string
+};
+
 let sampleStockValues: StockValue[] = [
-    //{ symbol: 't', value: 55 },
-    { symbol: 'mo', value: 20 }
+    { symbol: 't', value: 55 },
+   // { symbol: 'mo', value: 20 }
 ];
+
 
 export default function CalendarMonth({ month }: CalendarMonthProps) {
     let { name, days, startingDay} = month;
-    
+    let dayKey = 1;
+	let emptyDaySlots = startingDay+1;
+	let daysToResetWeek = 6;
 
     let calendarDays: JSX.Element[] = [];
 
-    for (let x = 0; x < startingDay; x++)
-        calendarDays.push(<CalendarDay />);
+	function setBorders() {
+		let borderSettings: BorderSettings = {};
 
-    for (let i = 1; i <= days; i++) 
-        calendarDays.push(<CalendarDay day={i} stockValues={sampleStockValues}/>);
-    
+		if(dayKey === 1  //Days on the left of the calendar
+		|| ( dayKey - 1) % 7 === 0)
+		borderSettings.borderLeft = '2px solid black';
+
+		if(dayKey % 7 === 0) //Days on the right of the calendar
+		borderSettings.borderRight = '2px solid black';
+
+		if(dayKey < 8) //Days on the top of the calendar
+		borderSettings.borderTop = '2px solid black';
+
+		if (dayKey < 29 && dayKey > 21) //Days on the second to last row of the calendar	
+		borderSettings.borderBottom = '2px solid black';
+
+		if(dayKey > 28) {
+			borderSettings.borderTop = '0px';
+			borderSettings.borderBottom = '2px solid black';
+		}
+
+		return borderSettings;
+	}
+	
+
+
+    for (let x = 0; x < startingDay; x++){
+        calendarDays.push(<CalendarDay key={dayKey} dayKey={dayKey} borderSettings={setBorders()}/>);
+		dayKey++;
+	}
+
+    for (let i = 1; i <= days; i++) {
+        calendarDays.push(<CalendarDay key={dayKey} dayKey={dayKey} day={i} stockValues={sampleStockValues} borderSettings={setBorders()}/>);
+		dayKey++;
+	}
 
     return ( 
         <div className='calendar'>
             <div id='monthLabel'><h2>{name}</h2></div>
             <div id='dayLabelContainer'>
-                <div className='dayLabel'>Sunday</div>
-                <div className='dayLabel'>Monday</div>
-                <div className='dayLabel'>Tuesday</div>
-                <div className='dayLabel'>Wednesday</div>
-                <div className='dayLabel'>Thursday</div>
-                <div className='dayLabel'>Friday</div>
-                <div className='dayLabel'>Saturday</div>
+                <div className='dayLabel'>SUN</div>
+                <div className='dayLabel'>MON</div>
+                <div className='dayLabel'>TUES</div>
+                <div className='dayLabel'>WED</div>
+                <div className='dayLabel'>THURS</div>
+                <div className='dayLabel'>FRI</div>
+                <div className='dayLabel'>SAT</div>
             </div>
             <div className='calendarDaysContainer'>
                 {calendarDays}

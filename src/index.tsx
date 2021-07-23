@@ -8,7 +8,7 @@ import { StockValue, months } from './interfaces';
 
 let sampleStockValues: StockValue[] = [
     { symbol: 't', value: 55 },
-    //{ symbol: 'mo', value: 20 }
+    { symbol: 'mo', value: 20 }
 ];
 
 interface MonthObject {
@@ -17,9 +17,9 @@ interface MonthObject {
     startingDay: number
 }
 
-let monthObject: MonthObject = Object.assign({startingDay: 0}, months.July);
+let monthObject: MonthObject = Object.assign({startingDay: 0}, months.February);
 let dateObject = new Date();
-dateObject.setMonth(6);
+dateObject.setMonth(2);
 dateObject.setDate(1);
 
 monthObject.startingDay = dateObject.getDay();

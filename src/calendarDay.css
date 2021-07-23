@@ -1,11 +1,17 @@
 .calendarDay {
-	//width: 200px;
-	//height: 200px;
+	width: 90px;
+	height: 90px;
 	border: 1px solid black;
+	overflow: auto;
+}
+
+.calendarDay:last-child {
+	border-right: 2px solid black;
 }
 
 .calendarDay h3 {
-	margin-left: 18.7px;
+	margin-left: 13px;
+	margin-top: 10px;
 	margin-bottom: 0px;
 }
 
@@ -18,7 +24,7 @@
 }
 
 .stockValue {
-	width: 50px;
+	width: 42px;
 	margin-bottom: 10px;
 }
 
