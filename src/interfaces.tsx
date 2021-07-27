@@ -3,6 +3,27 @@ export interface StockValue  {
     value: number
 };
 
+export enum MonthNames {
+    January = 'January',
+    February = 'February',
+    March = 'March',
+    April = 'April',
+    May = 'May',
+    June = 'June',
+    July = 'July',
+    August = 'August',
+    September = 'September',
+    October = 'October',
+    November = 'November',
+    December = 'December'
+};
+
+export interface MonthData {
+    name: string,
+    days: number,
+    startingDay: number
+}
+
 export const months = {
     January: { name: 'January', days: 31, monthNumber: 1 },
     February: { name: 'February', days: 28, monthNumber: 2 },

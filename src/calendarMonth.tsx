@@ -20,7 +20,7 @@ type BorderSettings = {
 
 let sampleStockValues: StockValue[] = [
     { symbol: 't', value: 55 },
-   // { symbol: 'mo', value: 20 }
+    { symbol: 'mo', value: 20 }
 ];
 
 

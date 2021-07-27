@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CalendarDay from './calendarDay';
-import CalendarMonth from './calendarMonth';
+import Main from './main';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { StockValue, months } from './interfaces';
@@ -11,22 +10,10 @@ let sampleStockValues: StockValue[] = [
     { symbol: 'mo', value: 20 }
 ];
 
-interface MonthObject {
-    name: string,
-    days: number,
-    startingDay: number
-}
-
-let monthObject: MonthObject = Object.assign({startingDay: 0}, months.February);
-let dateObject = new Date();
-dateObject.setMonth(2);
-dateObject.setDate(1);
-
-monthObject.startingDay = dateObject.getDay();
 
 ReactDOM.render(
   <React.StrictMode>
-        <CalendarMonth month={monthObject} />
+        <Main />
   </React.StrictMode>,
   document.getElementById('root')
 );

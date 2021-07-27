@@ -1,6 +1,6 @@
 .calendar {
     width: 652px;
-    height: 589px;
+    //height: 589px;
     margin: 50px auto;
     border: 1px solid black;
 }
@@ -16,6 +16,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     margin-left: 3px;
+    margin-bottom: 3px;
 }
 
 #dayLabelContainer {
