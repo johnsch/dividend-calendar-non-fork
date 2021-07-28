@@ -1,0 +1,15 @@
+#calendar {
+    width: 652px;
+    margin: 50px auto;
+}
+
+#cycleMonthButtonContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 500px;
+    margin: 12px auto;
+
+    font-weight: bold;
+    font-size: 30px;
+    cursor: pointer;
+}
