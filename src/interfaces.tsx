@@ -1,3 +1,17 @@
+export type DividendPayment = {
+    symbol: string,
+    year: number
+    month: number,
+    day: number,
+    amount: number
+    type: 'actual' | 'estimate'
+}
+
+export type StockPosition = {
+    symbol: string,
+    shares: number
+};
+
 export interface StockValue  {
     symbol: string,
     value: number
