@@ -1,3 +1,10 @@
+export type MainState = {
+    selectedYear: number,
+    selectedMonth: number,
+    bearerToken: string,
+    dividendPayments: DividendPayment[]
+};
+
 export type DividendPayment = {
     symbol: string,
     year: number

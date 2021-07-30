@@ -1,15 +1,17 @@
 import React, { useReducer, useEffect } from 'react';
 import CalendarMonth from './calendarMonth';
-import { MonthNames, months, MonthData } from './interfaces';
-import { getBearerToken } from './messenger';
+import { MonthNames, months, MonthData, StockPosition, DividendPayment, MainState } from './interfaces';
+import { getBearerToken, getDividendPayments } from './messenger';
+import { testStockPositions, testDividendData } from './testing/testData';
 import './main.css';
 
 let currentDate = new Date();
 
-const initialState = {
+const initialState: MainState = {
     selectedMonth: currentDate.getMonth() + 1,
     selectedYear: currentDate.getFullYear(),
-    bearerToken: ''
+    bearerToken: '',
+    dividendPayments: []
 };
 
 type ACTIONTYPE =
@@ -25,13 +27,15 @@ function reducer(state: typeof initialState, action: ACTIONTYPE) {
                 return ({
                     selectedYear: state.selectedYear + 1,
                     selectedMonth: 1,
-                    bearerToken: state.bearerToken
+                    bearerToken: state.bearerToken,
+                    dividendPayments: state.dividendPayments
                 });
             else
                 return ({
                     selectedYear: state.selectedYear,
                     selectedMonth: state.selectedMonth + 1,
-                    bearerToken: state.bearerToken
+                    bearerToken: state.bearerToken,
+                    dividendPayments: state.dividendPayments
                 });
 
         case 'decrement':
@@ -39,20 +43,23 @@ function reducer(state: typeof initialState, action: ACTIONTYPE) {
                 return ({
                     selectedYear: state.selectedYear - 1,
                     selectedMonth: 12,
-                    bearerToken: state.bearerToken
+                    bearerToken: state.bearerToken,
+                    dividendPayments: state.dividendPayments
                 });
             else
                 return ({
                     selectedYear: state.selectedYear,
                     selectedMonth: state.selectedMonth - 1,
-                    bearerToken: state.bearerToken
+                    bearerToken: state.bearerToken,
+                    dividendPayments: state.dividendPayments
                 });
 
         case 'setBearerToken':
             return ({
                 selectedYear: state.selectedYear,
                 selectedMonth: state.selectedMonth,
-                bearerToken: action.payload
+                bearerToken: action.payload,
+                dividendPayments: state.dividendPayments
             });
 
         default:
@@ -60,6 +67,9 @@ function reducer(state: typeof initialState, action: ACTIONTYPE) {
     }
 }
 
+function parseDividendPaymentData(data) {
+
+}
 
 export default function Main() {
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -67,13 +77,13 @@ export default function Main() {
     useEffect(() => {
 
         getBearerToken().then((token) => {
-            if(token)
+            getDividendPayments(testStockPositions, token).then((data) => {
+                console.log(data);
                 dispatch({ type: 'setBearerToken', payload: token });
-            console.log(token);
+            });
         });
     }, [])
 
-    console.log(state.bearerToken);
     let dateObject = new Date();
     let monthObject = Object.values(months).find(monthObject => monthObject.monthNumber === state.selectedMonth);
     

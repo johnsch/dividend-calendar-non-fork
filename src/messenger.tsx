@@ -2,7 +2,10 @@ import { StockPosition } from './interfaces';
 
 export function getBearerToken(): Promise<string> {
 	return new Promise((resolve, reject) => {
-		fetch('https://ibo-financials.com/v1/user?', { method: 'POST' })
+		let requestUrl = 'https://ibo-financials.com/v1/user?user=' + process.env.REACT_APP_USERNAME +
+			'&password=' + process.env.REACT_APP_PASSWORD;
+
+		fetch(requestUrl, { method: 'POST' })
 			.then(response => response.json())
 			.then(data => { resolve( data.token) });
 	});
