@@ -66,11 +66,11 @@ function reducer(state: typeof initialState, action: ACTIONTYPE) {
             throw new Error();
     }
 }
-
+/*
 function parseDividendPaymentData(data) {
 
 }
-
+*/
 export default function Main() {
     const [state, dispatch] = useReducer(reducer, initialState);
 

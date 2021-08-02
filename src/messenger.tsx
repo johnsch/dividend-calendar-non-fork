@@ -3,6 +3,7 @@ import { StockPosition } from './interfaces';
 export function getBearerToken(): Promise<string> {
 	return new Promise((resolve, reject) => {
 		let requestUrl = 'https://ibo-financials.com/v1/user?user=' + process.env.REACT_APP_USERNAME +
+		//let requestUrl = 'http://192.168.1.7:8080/v1/user?user=' + process.env.REACT_APP_USERNAME +
 			'&password=' + process.env.REACT_APP_PASSWORD;
 
 		fetch(requestUrl, { method: 'POST' })
@@ -14,6 +15,7 @@ export function getBearerToken(): Promise<string> {
 export async function getDividendPayments(stockPositions: StockPosition[], bearerToken: string): Promise<string> {
 	return new Promise((resolve, reject) => {
 		let requestUrl = 'https://ibo-financials.com/v1/dividends/calendar/';
+		//let requestUrl = 'http://192.168.1.7:8080/v1/dividends/calendar/';
 		let symbolQuery = '';
 		let sharesQuery = '';
 
