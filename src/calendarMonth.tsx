@@ -1,5 +1,5 @@
 import React from 'react';
-import { months, StockValue } from './interfaces';
+import { months, StockValue, DividendPayment } from './interfaces';
 import CalendarDay from './calendarDay';
 import './calendarMonth.css';
 
@@ -8,7 +8,8 @@ type CalendarMonthProps = {
         name: string,
         days: number,
         startingDay: number
-    }
+    },
+    dividendPayments: DividendPayment[]
 }
 
 type BorderSettings = {
@@ -18,13 +19,14 @@ type BorderSettings = {
 	borderBottom?: string
 };
 
+/*
 let sampleStockValues: StockValue[] = [
     { symbol: 't', value: 55 },
     //{ symbol: 'mo', value: 20 }
-];
+];*/
 
 
-export default function CalendarMonth({ month }: CalendarMonthProps) {
+export default function CalendarMonth({ month, dividendPayments }: CalendarMonthProps) {
     let { name, days, startingDay} = month;
     let dayKey = 1;
 	let emptyDaySlots = startingDay+1;
@@ -64,7 +66,20 @@ export default function CalendarMonth({ month }: CalendarMonthProps) {
 	}
 
     for (let i = 1; i <= days; i++) {
-        calendarDays.push(<CalendarDay key={dayKey} dayKey={dayKey} day={i} stockValues={sampleStockValues} borderSettings={setBorders()}/>);
+        let stockValues: StockValue[] = [];
+
+        dividendPayments.forEach(dividendPayment => {
+            if (dividendPayment.day === i) {
+                let stockValueObject: StockValue = {
+                    symbol: dividendPayment.symbol,
+                    value: dividendPayment.amount,
+                    type: dividendPayment.type
+                };
+                stockValues.push(stockValueObject);
+            }
+        });
+
+        calendarDays.push(<CalendarDay key={dayKey} dayKey={dayKey} day={i} stockValues={stockValues} borderSettings={setBorders()}/>);
 		dayKey++;
 	}
 

@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect } from 'react';
 import CalendarMonth from './calendarMonth';
-import { MonthNames, months, MonthData, StockPosition, DividendPayment, MainState } from './interfaces';
+import { MonthNames, months, MonthData, StockPosition, DividendPayment, MainState, DividendData } from './interfaces';
 import { getBearerToken, getDividendPayments } from './messenger';
 import { testStockPositions, testDividendData } from './testing/testData';
 import './main.css';
@@ -17,7 +17,8 @@ const initialState: MainState = {
 type ACTIONTYPE =
     | { type: 'increment' }
     | { type: 'decrement' }
-    | { type: 'setBearerToken', payload: string };
+    | { type: 'setBearerToken', payload: string }
+    | { type: 'setDividendPayments', payload: DividendPayment[] };
 
 
 function reducer(state: typeof initialState, action: ACTIONTYPE) {
@@ -62,15 +63,42 @@ function reducer(state: typeof initialState, action: ACTIONTYPE) {
                 dividendPayments: state.dividendPayments
             });
 
+        case 'setDividendPayments':
+            console.log(action.payload);
+            return ({
+                selectedYear: state.selectedYear,
+                selectedMonth: state.selectedMonth,
+                bearerToken: state.bearerToken,
+                dividendPayments: action.payload
+            });
         default:
             throw new Error();
     }
 }
-/*
-function parseDividendPaymentData(data) {
 
+
+function parseDividendPaymentData(data: DividendData[]): DividendPayment[] {
+    let newDividendPayments: DividendPayment[] = [];
+    
+    data.forEach((current) => {
+        let parsedDate = current.paymentDate.split('-');
+
+        let dividendPayment: DividendPayment = {
+            symbol: current.symbol,
+            year: Number(parsedDate[0]),
+            month: Number(parsedDate[1]),
+            day: Number(parsedDate[2]),
+            amount: current.amountTotal,
+            type: current.type
+        };
+
+        newDividendPayments.push(dividendPayment);
+    });
+
+    return newDividendPayments;
 }
-*/
+
+
 export default function Main() {
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -79,7 +107,9 @@ export default function Main() {
         getBearerToken().then((token) => {
             getDividendPayments(testStockPositions, token).then((data) => {
                 console.log(data);
-                dispatch({ type: 'setBearerToken', payload: token });
+                //dispatch({ type: 'setBearerToken', payload: token });
+                let parsedDividendPayments = parseDividendPaymentData(data.dividendCalendarList);
+                dispatch({ type: 'setDividendPayments', payload: parsedDividendPayments })
             });
         });
     }, [])
@@ -92,6 +122,13 @@ export default function Main() {
     dateObject.setDate(1);
 
     let monthData: MonthData = Object.assign({ startingDay: dateObject.getDay() }, monthObject);
+    let dividendPaymentsForMonth: DividendPayment[] = [];
+
+    state.dividendPayments.forEach((dividendPayment: DividendPayment) => {
+        if (dividendPayment.year === state.selectedYear
+            && dividendPayment.month === state.selectedMonth)
+            dividendPaymentsForMonth.push(dividendPayment);
+    });
 
     return (
         <div>
@@ -101,7 +138,7 @@ export default function Main() {
                     {state.selectedYear}
                     <div className='cycleMonthButton' onClick={() => dispatch({ type: 'increment' })}>&gt;</div>
                 </div>
-                <CalendarMonth month={monthData} />
+                <CalendarMonth month={monthData} dividendPayments={dividendPaymentsForMonth}/>
             </div>
         </div>
     );    

@@ -5,9 +5,35 @@ export type MainState = {
     dividendPayments: DividendPayment[]
 };
 
+export type DividendRequestData = {
+    "dividendCalendarList": DividendData[],
+    "dividendCalendarAgList": DividendAgData[]
+};
+
+export type DividendAgData = {
+    "agType": string,
+    "symbolList": string[],
+    "paymentYear": number,
+    "paymentMonth": number,
+    "amountTotal": number
+};
+
+export type DividendData = {
+    "type": "actual" | "estimate",
+    "symbol": string,
+    "shares": number,
+    "frequency": 'unspecified' | 'monthly' | 'quarterly' | 'semi-annual' | 'annual',
+    "amountPerShare": number,
+    "exDate": string,
+    "paymentDate": string,
+    "paymentYear": number,
+    "paymentMonth": number,
+    "amountTotal": number
+};
+
 export type DividendPayment = {
     symbol: string,
-    year: number
+    year: number,
     month: number,
     day: number,
     amount: number
@@ -21,7 +47,8 @@ export type StockPosition = {
 
 export interface StockValue  {
     symbol: string,
-    value: number
+    value: number,
+    type: 'actual' | 'estimate'
 };
 
 export enum MonthNames {
