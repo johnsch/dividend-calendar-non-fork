@@ -5,10 +5,12 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { StockValue, months } from './interfaces';
 
+/*
 let sampleStockValues: StockValue[] = [
     { symbol: 't', value: 55 },
     { symbol: 'mo', value: 20 }
 ];
+*/
 
 
 ReactDOM.render(

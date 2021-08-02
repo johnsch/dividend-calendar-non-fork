@@ -1,4 +1,4 @@
-import { StockPosition } from './interfaces';
+import { StockPosition, DividendRequestData } from './interfaces';
 
 export function getBearerToken(): Promise<string> {
 	return new Promise((resolve, reject) => {
@@ -12,7 +12,7 @@ export function getBearerToken(): Promise<string> {
 	});
 }
 
-export async function getDividendPayments(stockPositions: StockPosition[], bearerToken: string): Promise<string> {
+export async function getDividendPayments(stockPositions: StockPosition[], bearerToken: string): Promise<DividendRequestData> {
 	return new Promise((resolve, reject) => {
 		let requestUrl = 'https://ibo-financials.com/v1/dividends/calendar/';
 		//let requestUrl = 'http://192.168.1.7:8080/v1/dividends/calendar/';
