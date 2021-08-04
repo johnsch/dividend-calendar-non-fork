@@ -76,7 +76,6 @@ function reducer(state: typeof initialState, action: ACTIONTYPE) {
     }
 }
 
-
 function parseDividendPaymentData(data: DividendData[]): DividendPayment[] {
     let newDividendPayments: DividendPayment[] = [];
     
